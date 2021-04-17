@@ -1,0 +1,56 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url(DSC4595.jpeg);
+    background-size: cover;
+}
+
+.login{
+    width: 370px;
+    height: 520px;
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    top: 50%;
+    left: 80%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+}
+
+.login h2 {
+    color: rgb(0, 88, 204);
+    text-align: center;
+    font-size: 35px;
+
+}
+
+.login p {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.login input {
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+.login input[type = "username"], input[type="password"]{
+    border: none;
+    border-bottom: 1px solid rgb(0, 0, 0);
+    background: transparent;
+    outline: none;
+    height: 40px;
+}
+
+.header {
+    font-size: 35px;
+    font-family: "Times New Roman", Times, serif;
+
+    top: 0%;
+    position: absolute;
+    color:rgb(255, 255, 255);
+}
+
+.login button {
+       width: 20%;
+}
