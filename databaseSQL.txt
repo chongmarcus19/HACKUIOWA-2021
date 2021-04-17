@@ -1,0 +1,143 @@
+-- Database: Buff_Forum
+
+-- DROP DATABASE "Buff_Forum";
+
+CREATE DATABASE "Buff_Forum"
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'English_United States.1252'
+    LC_CTYPE = 'English_United States.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+
+
+
+
+
+
+-- Table: public.Comments
+
+-- DROP TABLE public."Comments";
+
+CREATE TABLE public."Comments"
+(
+    "Author" name COLLATE pg_catalog."C",
+    "Post" uuid,
+    "Content" character varying(5000) COLLATE pg_catalog."default",
+    "Parent" uuid NOT NULL,
+    CONSTRAINT ID PRIMARY KEY ("ID"),
+    CONSTRAINT pk_comment FOREIGN KEY ("ID"),
+	REFERENCES public."Comments" ("ID") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT fk_author FOREIGN KEY ("Author")
+        REFERENCES public."Users" ("Username") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT fk_parent FOREIGN KEY ("Parent")
+        REFERENCES public."Comments" ("ID") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT pk_post FOREIGN KEY ("Post")
+        REFERENCES public."Posts" ("ID") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public."Comments"
+    OWNER to postgres;
+-- Index: fki_fk_parent
+
+-- DROP INDEX public.fki_fk_parent;
+
+CREATE INDEX fki_fk_parent
+    ON public."Comments" USING btree
+    ("Parent" ASC NULLS LAST)
+    TABLESPACE pg_default;
+-- Index: fki_fk_post
+
+-- DROP INDEX public.fki_fk_post;
+
+CREATE INDEX fki_fk_post
+    ON public."Comments" USING btree
+    ("Author" COLLATE pg_catalog."C" ASC NULLS LAST)
+    TABLESPACE pg_default;
+-- Index: fki_pk_post
+
+-- DROP INDEX public.fki_pk_post;
+
+CREATE INDEX fki_pk_post
+    ON public."Comments" USING btree
+    ("Post" ASC NULLS LAST)
+    TABLESPACE pg_default;
+
+
+
+
+
+
+
+
+-- Table: public.Posts
+
+-- DROP TABLE public."Posts";
+
+CREATE TABLE public."Posts"
+(
+    "Author" name COLLATE pg_catalog."C",
+    "Title" character varying(200) COLLATE pg_catalog."default",
+    "Content" character varying(5000) COLLATE pg_catalog."default",
+    "ID" uuid NOT NULL,
+    CONSTRAINT pk_id PRIMARY KEY ("ID"),
+    CONSTRAINT fk_author FOREIGN KEY ("Author")
+        REFERENCES public."Users" ("Username") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public."Posts"
+    OWNER to postgres;
+-- Index: fki_fk_name
+
+-- DROP INDEX public.fki_fk_name;
+
+CREATE INDEX fki_fk_name
+    ON public."Posts" USING btree
+    ("Author" COLLATE pg_catalog."C" ASC NULLS LAST)
+    TABLESPACE pg_default;
+
+
+
+
+
+
+
+
+
+
+-- Table: public.Users
+
+-- DROP TABLE public."Users";
+
+CREATE TABLE public."Users"
+(
+    "Username" name COLLATE pg_catalog."C" NOT NULL,
+    "Password" character varying COLLATE pg_catalog."default",
+    "Type" character varying(16) COLLATE pg_catalog."default",
+    CONSTRAINT pk_name PRIMARY KEY ("Username")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public."Users"
+    OWNER to postgres;
