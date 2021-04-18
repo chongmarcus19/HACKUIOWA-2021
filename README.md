@@ -16,6 +16,6 @@ By creating these friendships between international and local students, it gives
 
 ### Snaps
 
-<img src="Screenshots/login.png" height="950px" width="400px">
-<img src="Screenshots/register.png" height="950px" width="400px">
-<img src="Screenshots/interests.png" height="950px" width="400px">
+<img src="Screenshots/login.png" height="400px" width="950pxpx">
+<img src="Screenshots/register.png" height="400px" width="950pxpx">
+<img src="Screenshots/interests.png" height="400px" width="950pxpx">
