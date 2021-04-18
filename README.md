@@ -13,3 +13,9 @@ I thought the site turned out aesthetically appealing, however, it could have be
 I got to implement a lot of new skills I learned this semester in my classes and I also learned how to apply my code to real-life situations as the assignments in classes can sometimes feel unfulfilling as there is no real implication to them.
 ## What's next for Abroad
 By creating these friendships between international and local students, it gives local students an easy way to learn from people of other cultures while international students can learn from their local friends which allows them more easily transition from one culture to another. I would have liked to implement a direct messaging system. However, with the 24-hour time limit, I could not figure it out in the time frame, as the implementation for one was complicated.
+
+### Snaps
+
+<img src="screenshots/login.png" height="300px" width="500px">
+<img src="screenshots/register.png" height="300px" width="500px">
+<img src="screenshots/interests.png" height="300px" width="500px">
