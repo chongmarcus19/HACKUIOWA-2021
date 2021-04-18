@@ -34,7 +34,7 @@ body {
     margin-bottom: 20px;
 }
 
-.login input[type = "username"], input[type="password"]{
+.login input[type = "email"], input[type="password"]{
     border: none;
     border-bottom: 1px solid rgb(0, 0, 0);
     background: transparent;

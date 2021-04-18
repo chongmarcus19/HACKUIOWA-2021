@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="loginPage.css">
+        <link rel="stylesheet" href="/views/pages/loginPage.css">
         <title>Login</title>
     </head>
 
@@ -17,15 +17,15 @@
                 <div class="col-auto-sm">
                     <form class="loginForm" novalidate>
                         <div class="form-group">
-                            <p>Username</p>
-                            <input type="username" class="form-control" id="user" placeHolder="Username" size=30 required>
+                            <label for="emailInput" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="emailInput" placeHolder="Email" size=30 required>
                             <div class="invalid-feedback">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <p>Password </p>
-                            <input type="password" class="form-control" id="pass" placeHolder="Password" name="passkey" size=30 required>
+                            <label for="passwordInput">Password</label>
+                            <input type="password" class="form-control" id="passwordInput" placeHolder="Password" name="originalPassword" size=25 required>
                             <div class="invalid-feedback">
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                     </form>
 
                 <script>
-                    console.log(getCookie("username"));
+                    console.log(getCookie("email"));
                     window.addEventListener('load', function() {
                         var forms = document.getElementsByClassName('loginForm');
                         var validation = Array.prototype.filter.call(forms, function(form) {
@@ -50,11 +50,11 @@
                                 }
                                 else {
                                     event.preventDefault();
-                                    let nameInput=document.getElementById("user").value;
-                                    let passInput=document.getElementById("pass").value;
+                                    let eInput=document.getElementById("emailInput").value;
+                                    let passInput=document.getElementById("passwordInput").value;
 
                                     var reqUrl=window.location.href + '/submit';
-                                    $.post(reqUrl,{userNameInput:nameInput,passwordInput:passInput})
+                                    $.post(reqUrl,{emailInput:eInput,passwordInput:passInput})
                              
                                     .done(function(data) {
                                         const validLogin=data.validLogin;
