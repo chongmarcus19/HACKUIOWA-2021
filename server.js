@@ -11,8 +11,6 @@ const dbConfig = {
 	host: 'db',
 	port: 5432,
 	database: 'abroad_db',
-	user: 'postgres',
-	password: 'pwd'
 };
 
 var db = pgp(dbConfig);
@@ -43,28 +41,22 @@ app.get('/interests',function(req,res) {
 });
 
 app.get('/homePage', function(req, res) {
-	const query_1='select * from posts ORDER BY vote_amount DESC;'; // gets every post
-	const query_2='select * from subforums;'; // gets every subforum
+	const query ='select * from users;';
 	
 	db.task('get-everything',function(task) {
 		return task.batch([
-			task.any(query_1),
-			task.any(query_2)
+			task.any(query),
 		]);
 	})
 	.then(function(data) {
-		//console.log(data[0])
-		//console.log(data[1])
 		res.render('pages/homePage', {
-			posts:data[0], 		// posts
-			subForums:data[1]	// subforums
+			users:data[0], 
 		});
 	})
 	.catch(function(err) {
 		console.log(`Query Error ${err}`);
 		res.render('pages/homePage', {
-			subForums:[''],
-			posts:[]
+			users:[]
 		});
 	});
 });
@@ -102,27 +94,34 @@ app.post('/register/create',function(req,res) {
 	const query=`INSERT INTO users(email, pwd, firstname, lastname, uni, home_country) VALUES('${newEmail}','${newPassword}','${newFirst}','${newLast}','${newUni}','${newCountry}');`;
 	db.any(query)
 	.then(function(info) {
-		console.log('Successful Registration');
+		console.log('Registration Successful');
 		res.send({registrationWorked:true});
 	})
 	.catch(function(err) {
-		console.log(`Registration Error:\n ${err}`);
+		console.log(`Registration Failed`);
 		res.send({registrationWorked:false});
 	});
 });
 
 app.post('/interests/create',function(req,res) {
-	const newUsername=req.body.newUsername;
-	const newPassword=req.body.newPassword;
-	const query=`INSERT INTO logins(username, pwd) VALUES('${newUsername}','${newPassword}');`;
+	const email=req.body.email;
+	const first = req.body.first;
+	const last = req.body.last;
+	const country = req.body.country;
+	const interest1=req.body.interest1;
+	const interest2=req.body.interest2;
+	const interest3=req.body.interest3;
+	const interest4=req.body.interest4;
+	const interest5=req.body.interest5;
+	const query=`INSERT INTO interests(email, firstname, lastname, home_country, interest1, interest2, interest3, interest4, interest5) VALUES('${email}','${first}','${last}','${country}','${interest1}','${interest2}','${interest3}','${interest4}','${interest5}');`;
 	db.any(query)
 	.then(function(info) {
-		console.log('Successful Registration');
-		res.send({registrationWorked:true});
+		console.log('Registration Successful');
+		res.send({interestWorked:true});
 	})
 	.catch(function(err) {
-		console.log(`Registration Error:\n ${err}`);
-		res.send({registrationWorked:false});
+		console.log(`Registration Failed`);
+		res.send({interestWorked:false});
 	});
 });
 
